@@ -20,7 +20,7 @@ void update_layer_callback(Layer *me, GContext* ctx) {
   graphics_context_set_text_color(ctx, GColorBlack);
 
   graphics_text_draw(ctx,
-		     "Hello World.",
+		     "Hello.",
 		     fonts_get_system_font(FONT_KEY_DROID_SERIF_28_BOLD),
 		     GRect(5, 5, 200, 200),
 		     GTextOverflowModeWordWrap,
@@ -33,6 +33,10 @@ void handle_init(AppContextRef ctx) {
 
   window_init(&window, "Window Name");
   window_stack_push(&window, true /* Animated */);
+  
+  layer_init(&layer, window.layer.frame);
+  layer.update_proc = update_layer_callback;
+  layer_add_child(&window.layer, &layer);
 }
 
 
